@@ -32,6 +32,8 @@ const products = [{
   priceCents: 799
 }];
 
+// Generating HTML into the webpage through by javascript instead of writing copying html code pasting over and over again in html file.
+
 
 let productsHtml = '';
 products.forEach((product)=>{
