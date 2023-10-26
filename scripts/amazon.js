@@ -6,7 +6,8 @@
 
 // save the data 
 // below this code are organized through data structure by the help of array with object.
-const products = [{
+
+/*const products = [{
   image: 'images/products/athletic-cotton-socks-6-pairs.jpg',// save this as a string
   name: 'Black and Gray Athletic Cotton Socks - 6 Pairs',
   rating: {
@@ -30,7 +31,18 @@ const products = [{
     count: 56
   },
   priceCents: 799
+},{
+  image:'images/products/black-2-slot-toaster.jpg',
+  name:'2 Slot Toaster - Black',
+  rating:{
+    stars:5,
+    count:2197
+  },
+  priceCents:1899
 }];
+*/
+
+
 
 // Generating HTML into the webpage through by javascript instead of writing copying html code pasting over and over again in html file.
 
