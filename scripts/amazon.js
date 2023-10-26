@@ -96,14 +96,48 @@ products.forEach((product)=>{
       Added
     </div>
 
-    <button class="add-to-cart-button button-primary">
+    <button class="add-to-cart-button button-primary js-add-to-cart" 
+    data-product-name="${product.name}" 
+    data-product-id="${product.id}"
+    >
       Add to Cart
     </button>
   </div>
   `;
 });
 
-console.log(productsHtml);
+// in above code we used Data Attribute, this is the another type of html attribute which is allow us to attach any information to an html element and we can give own attribute name ,like ' data-product-name="${product.name}"'
 
 
+/* syntax rule for a data attribute
+  -is just an html attribute.
+  -have to always start with "data-".
+  -then give it any name as we want.
+  -then attribute name should seperate by - which means/known as kebab case
+*/
 document.querySelector('.js-products-grid').innerHTML = productsHtml;
+
+document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
+  button.addEventListener('click',()=>{
+    const productId = button.dataset.productId;// dataset is a property ,it basically give's us all data attribute that are attached to the element and it just work as a object so we can access the object by the help of propertyName and then propertyName is convert from kabeb case into Camel case.
+
+    let matchingItem;// undefined 
+
+    cart.forEach((item)=>{
+      if(productId === item.productId){
+        matchingItem =item;
+      }
+    });
+
+    if(matchingItem){
+      matchingItem.quantity+=1;
+    }
+    else{
+      cart.push({
+        productId:productId,
+        quantity:1
+      });
+    }
+    console.log(cart);
+  });
+});
