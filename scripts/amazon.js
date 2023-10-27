@@ -1,4 +1,6 @@
 import {cart as mycart} from '../data/cart.js';// import a cart variable from other file through the import module and file path.
+import {products} from '../data/products.js';// here we didn't use (as give different variable in import module) because we didn't create a same variable that was import by import module. 
+
 
 // const cart = []; this will also create a naming conflicts,because if we use same variable like cart then the javascript code won't work on webpage, so module have another benefits to avoid naming conflicts by give different name in import {cart as mycart} so no longer conflict with this cart variable name or some other name that we import from other files.
 
