@@ -75,7 +75,7 @@ products.forEach((product)=>{
     </div>
 
     <div class="product-quantity-container">
-      <select>
+      <select class="js-quantity-selector-${product.id}">
         <option selected value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -91,7 +91,7 @@ products.forEach((product)=>{
 
     <div class="product-spacer"></div>
 
-    <div class="added-to-cart">
+    <div class="added-to-cart js-added-to-cart-${product.id}">
       <img src="images/icons/checkmark.png">
       Added
     </div>
@@ -121,6 +121,7 @@ document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
   button.addEventListener('click',()=>{
     const productId = button.dataset.productId;// dataset is a property ,it basically give's us all data attribute that are attached to the element and it just work as a object so we can access the object by the help of propertyName and then propertyName is convert from kabeb case into Camel case.
 
+
     let matchingItem;// undefined 
 
     cart.forEach((item)=>{
@@ -129,13 +130,20 @@ document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
       }
     });
 
+    const quantitySelector = Number(document.querySelector(
+      `.js-quantity-selector-${productId}`
+    ).value);
+
+
     if(matchingItem){
       matchingItem.quantity+=1;
+      matchingItem.quantity+=quantitySelector;
     }
     else{
       cart.push({
         productId:productId,
-        quantity:1
+        quantity:1,
+        quantity:quantitySelector
       });
     }
 
@@ -147,5 +155,18 @@ document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
 
     //console.log(cart);
     document.querySelector('.js-cartQuantity').innerHTML = cartQuantity;
-  });
+
+
+    const added =  document.querySelector(`.js-added-to-cart-${productId}`);
+    if(added.classList.contains('visible-added')){
+      setTimeout(()=>{
+        added.classList.remove('visible-added');
+      },2000);
+    }
+    else{
+      added.classList.add('visible-added');
+    }
+  });  
 });
+
+
