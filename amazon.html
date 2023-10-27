@@ -59,10 +59,31 @@
     
     
     
+    <!-- module
+    -> module is used for organize our code better in bigger project.
+
+
+    -> benefits of module is for removing/avoid naming conflicts. for example: the cart.js file contain cart variable and if we use the variable in some other file then will cause a naming conflicts/declared of const variable in console.
+
+
+    -> order is doesn't matter. when compare to script tag,why means because in script every files should be ordered one after to other then only we can run all the files properly.
+    
+    -> then how to get a variable out of a file by help of module and there are three steps to use module:
+    
+    1- Add type="module" attribute in script tag. feature let this file get variable out of other files. 
+    2- Export is used for choose which variable can be accessed outside of this file. 
+    
+    3- Import is used for which variable where going to use and which variable we want to get from other file.
+    
+    condition for module is,
+    1- module always import in top of the file.
+    2- module always runs in live server. so we cannot run directly html file to see the module or data in webpage it show/throughout some error/disappear.
+    -->
+    
     
     <script src="data/cart.js"></script>
     <script src="data/products.js"></script><!--this javascript file contain a data of the product and order is matter 
      because we first save the data then only we can generate the html by the help of javascript, so that's why we first put products.js file then before amazon.js file-->
-    <script src="scripts/amazon.js"></script><!--this javascript file used for generating html into the webpage through the given data or products-->
+    <script type="module" src="scripts/amazon.js"></script><!--this javascript file used for generating html into the webpage through the given data or products-->
   </body>
 </html>

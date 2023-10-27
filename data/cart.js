@@ -1,3 +1,1 @@
-const cart = [
-  
-];
+export const cart = [];// now the cart variable can be use in any other files without naming conflicts, through by export module.

@@ -1,3 +1,7 @@
+import {cart as mycart} from '../data/cart.js';// import a cart variable from other file through the import module and file path.
+
+// const cart = []; this will also create a naming conflicts,because if we use same variable like cart then the javascript code won't work on webpage, so module have another benefits to avoid naming conflicts by give different name in import {cart as mycart} so no longer conflict with this cart variable name or some other name that we import from other files.
+
 /* Main use of javascript is,
   first is save the data / information like products;
   second is a generating html;
@@ -46,7 +50,7 @@
 
 // Generating HTML into the webpage through by javascript instead of writing copying html code pasting over and over again in html file.
 
-
+const cart= [];
 let productsHtml = '';
 products.forEach((product)=>{
   // the below variable productsHtml is a accumalator pattern it is used to store the result.
