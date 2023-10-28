@@ -1,4 +1,4 @@
-import {cart as mycart} from '../data/cart.js';// import a cart variable from other file through the import module and file path.
+import {cart, addtoCart} from '../data/cart.js';// import a cart variable from other file through the import module and file path and we can use multiple variable or function in one file and one import at same file.
 import {products} from '../data/products.js';// here we didn't use (as give different variable in import module) because we didn't create a same variable that was import by import module. 
 
 
@@ -52,7 +52,7 @@ import {products} from '../data/products.js';// here we didn't use (as give diff
 
 // Generating HTML into the webpage through by javascript instead of writing copying html code pasting over and over again in html file.
 
-const cart= [];
+
 let productsHtml = '';
 products.forEach((product)=>{
   // the below variable productsHtml is a accumalator pattern it is used to store the result.
@@ -123,55 +123,78 @@ products.forEach((product)=>{
 */
 document.querySelector('.js-products-grid').innerHTML = productsHtml;
 
-document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
-  button.addEventListener('click',()=>{
-    const productId = button.dataset.productId;// dataset is a property ,it basically give's us all data attribute that are attached to the element and it just work as a object so we can access the object by the help of propertyName and then propertyName is convert from kabeb case into Camel case.
 
+// updata the cartQuantity/total of Quantity
+function updateCartQuantity(){
+  let cartQuantity = 0;
 
-    let matchingItem;// undefined 
-
-    cart.forEach((item)=>{
-      if(productId === item.productId){
-        matchingItem =item;
-      }
-    });
-
-    const quantitySelector = Number(document.querySelector(
-      `.js-quantity-selector-${productId}`
-    ).value);
-
-
-    if(matchingItem){
-      matchingItem.quantity+=1;
-      matchingItem.quantity+=quantitySelector;
-    }
-    else{
-      cart.push({
-        productId:productId,
-        quantity:1,
-        quantity:quantitySelector
-      });
-    }
-
-    let cartQuantity = 0;
-
-    cart.forEach((item)=>{
-      cartQuantity+= item.quantity;
+    cart.forEach((cartItem)=>{
+      cartQuantity+= cartItem.quantity;
     });
 
     //console.log(cart);
     document.querySelector('.js-cartQuantity').innerHTML = cartQuantity;
+}
 
-
-    const added =  document.querySelector(`.js-added-to-cart-${productId}`);
-    if(added.classList.contains('visible-added')){
+// special effect when we click the add-to-cart button it show added in webpage.
+function EffectAdded(productId){
+  const added =  document.querySelector(`.js-added-to-cart-${productId}`);
+    /*if(added.classList.contains('visible-added')){
       setTimeout(()=>{
         added.classList.remove('visible-added');
       },2000);
     }
     else{
       added.classList.add('visible-added');
-    }
+    }*/
+
+
+    // We're going to use an object to save the timeout ids.
+    // The reason we use an object is because each product
+    // will have its own timeoutId. So an object lets us
+    // save multiple timeout ids for different products.
+    // For example:
+    // {
+    //   'product-id1': 2,
+    //   'product-id2': 5,
+    //   ...
+    // }
+    // (2 and 5 are ids that are returned when we call setTimeout).
+
+    const addedMessageTimeouts = {};
+
+    added.classList.add('visible-added');
+
+    setTimeout(()=>{
+       // Check if there's a previous timeout for this
+      // product. If there is, we should stop it.
+
+      const previousTimeoutId = addedMessageTimeouts[productId];
+      if (previousTimeoutId) {
+        clearTimeout(previousTimeoutId);
+      }
+
+      const timeoutId = setTimeout(() => {
+        added.classList.remove('visible-added');
+      }, 2000);
+    });
+    
+    // Save the timeoutId for this product
+      // so we can stop it later if we need to.
+    addedMessageTimeouts[productId] = timeoutId;
+}
+
+
+document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
+  button.addEventListener('click',()=>{
+    const productId = button.dataset.productId;// dataset is a property ,it basically give's us all data attribute that are attached to the element and it just work as a object so we can access the object by the help of propertyName and then propertyName is convert from kabeb case into Camel case.
+    
+    addtoCart(productId);// calling a function for add products into the cart.
+
+    updateCartQuantity();
+
+    EffectAdded(productId);
+
   });  
 });
 
