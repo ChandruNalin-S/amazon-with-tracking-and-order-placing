@@ -1,5 +1,6 @@
 import {cart, addtoCart} from '../data/cart.js';// import a cart variable from other file through the import module and file path and we can use multiple variable or function in one file and one import at same file.
 import {products} from '../data/products.js';// here we didn't use (as give different variable in import module) because we didn't create a same variable that was import by import module. 
+import { formatCurrency } from './utils/money.js';
 
 
 // const cart = []; this will also create a naming conflicts,because if we use same variable like cart then the javascript code won't work on webpage, so module have another benefits to avoid naming conflicts by give different name in import {cart as mycart} so no longer conflict with this cart variable name or some other name that we import from other files.
@@ -77,7 +78,7 @@ products.forEach((product)=>{
     </div>
 
     <div class="product-price">
-      ${(product.priceCents/100).toFixed(2)}
+      ${formatCurrency(product.priceCents)}
     </div>
 
     <div class="product-quantity-container">
