@@ -1,4 +1,4 @@
-import {cart, addtoCart} from '../data/cart.js';// import a cart variable from other file through the import module and file path and we can use multiple variable or function in one file and one import at same file.
+import {cart, addtoCart, calculateCartQuantity} from '../data/cart.js';// import a cart variable from other file through the import module and file path and we can use multiple variable or function in one file and one import at same file.
 import {products} from '../data/products.js';// here we didn't use (as give different variable in import module) because we didn't create a same variable that was import by import module. 
 import { formatCurrency } from './utils/money.js';
 
@@ -125,16 +125,11 @@ products.forEach((product)=>{
 document.querySelector('.js-products-grid').innerHTML = productsHtml;
 
 
-// updata the cartQuantity/total of Quantity
+// update the cartQuantity/total of Quantity
 function updateCartQuantity(){
-  let cartQuantity = 0;
-
-    cart.forEach((cartItem)=>{
-      cartQuantity+= cartItem.quantity;
-    });
-
+    const cartQuantity = calculateCartQuantity();
     //console.log(cart);
-    document.querySelector('.js-cartQuantity').innerHTML = cartQuantity;
+    document.querySelector('.js-cartQuantity').innerHTML = cartQuantity ;
 }
 
 // special effect when we click the add-to-cart button it show added in webpage.
@@ -185,6 +180,7 @@ function EffectAdded(productId){
     addedMessageTimeouts[productId] = timeoutId;
 }
 
+updateCartQuantity();
 
 document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
   button.addEventListener('click',()=>{
