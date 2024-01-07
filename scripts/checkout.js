@@ -3,11 +3,12 @@ import {
   removeFromCart, 
   calculateCartQuantity,
   updateQuantity,
+  updateDeliveryOption,
 } from '../data/cart.js';
 import {products} from '../data/products.js';
 import { formatCurrency } from './utils/money.js';// the single dot denotes ,the file is in current folder.
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';// here we didn't give {} bracket because it is a default export and it only one function can be export from the file.
-import {deliverOptions} from '../data/deliveryOptions.js';
+import {deliveryOptions} from '../data/deliveryOptions.js';
 // each file can only have 1 default export.
 
 /*Calculate delivery date:
@@ -43,7 +44,7 @@ cart.forEach((cartItem)=>{
 
   let deliveryOption;
 
-  deliverOptions.forEach((option)=>{
+  deliveryOptions.forEach((option)=>{
     if(option.id === deliverOptionId){
       deliveryOption = option;
     }
@@ -105,22 +106,23 @@ ${deliveryOptionsHTML(matchingProduct,cartItem)}
 
 function deliveryOptionsHTML(matchingProduct,cartItem){
   let html = '';
-  deliverOptions.forEach((deliverOption)=>{
+  deliveryOptions.forEach((deliveryOption)=>{
     const today = dayjs();
     const deliveryDate  = today.add(
-      deliverOption.deliveryDays,
+      deliveryOption.deliveryDays,
       "days"
     );
     
     const dateString = deliveryDate.format('dddd, MMMM D');
 
-    const priceString = deliverOption.priceCents === 0 ? 'FREE' : `$${formatCurrency(deliverOption.priceCents)}-`;
+    const priceString = deliveryOption.priceCents === 0 ? 'FREE' : `$${formatCurrency(deliveryOption.priceCents)}-`;
 
-    const  isChecked = deliverOption.id === cartItem.deliveryOptionId;
+    const  isChecked = deliveryOption.id === cartItem.deliveryOptionId;
 
 
    html += 
-   `<div class="delivery-option">
+   `<div class="delivery-option js-delivery-option" data-product-id="${matchingProduct.id}"
+   data-delivery-option-id="${deliveryOption.id}">
       <input type="radio"
         ${isChecked ? 'checked' : ''}
         class="delivery-option-input"
@@ -227,6 +229,14 @@ document.querySelectorAll('.js-update-link').forEach((link)=>{
       
     });
 });
+
+
+document.querySelectorAll('.js-delivery-option').forEach((element)=>{
+  element.addEventListener('click',()=>{
+    const {productId,deliveryOptionId} = element.dataset;//shorthand property
+    updateDeliveryOption(productId,deliveryOptionId);
+  })
+})
 
 
 
