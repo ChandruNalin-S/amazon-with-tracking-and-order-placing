@@ -5,10 +5,11 @@ import {
   updateQuantity,
   updateDeliveryOption,
 } from '../../data/cart.js';
-import {products} from '../../data/products.js';
+import {getProduct} from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';// the single dot denotes ,the file is in current folder.
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';// here we didn't give {} bracket because it is a default export and it only one function can be export from the file.
-import {deliveryOptions} from '../../data/deliveryOptions.js';
+import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
+import { renderPaymentSummary } from './paymentSummary.js';
 // each file can only have 1 default export.
 
 /*Calculate delivery date:
@@ -30,25 +31,13 @@ cart.forEach((cartItem)=>{
 
   const productId = cartItem.productId;// through the id, we can access of all corresponding data which is known as de-duplicating or normalizing the data, this will mostly using in software engineering. 
 
-  let matchingProduct;
-
-  products.forEach((product)=>{
-    if(product.id === productId){
-      matchingProduct=product;
-    }
-  });
+  const matchingProduct = getProduct(productId);
 
   //console.log(matchingProduct);
 
   const deliverOptionId = cartItem.deliveryOptionId;
 
-  let deliveryOption;
-
-  deliveryOptions.forEach((option)=>{
-    if(option.id === deliverOptionId){
-      deliveryOption = option;
-    }
-  });
+  const deliveryOption = getDeliveryOption(deliverOptionId);
 
 const today = dayjs();
 const deliveryDate  = today.add(
@@ -236,6 +225,7 @@ document.querySelectorAll('.js-delivery-option').forEach((element)=>{
     const {productId,deliveryOptionId} = element.dataset;//shorthand property
     updateDeliveryOption(productId,deliveryOptionId);
     renderOrderSummary();// A function can call / re-run itself is called recursion.
+    renderPaymentSummary();
   });
 });
 }
