@@ -159,6 +159,7 @@ document.querySelectorAll('.js-delete-link').forEach((link)=>{
     container.remove();// remove the html element from the page through the dom.
 
     updateCartQuantity();
+    renderPaymentSummary();
   });
 });
 
