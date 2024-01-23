@@ -34,6 +34,15 @@ How many test case should we have?
 
 */
 
+/*
+TESTTING FRAMEWORK: Externel library that helps us write tests easier.
+
+note: testing framework helps us do below code automatically and gives us many other features.
+
+POPULAR TESTING FRAMEWORK CALLED "Jasmine".
+
+*/
+
 
 // group of related tests = "test suite".
 console.log("test suite: formatcurrency");
