@@ -41,6 +41,8 @@ note: testing framework helps us do below code automatically and gives us many o
 
 POPULAR TESTING FRAMEWORK CALLED "Jasmine".
 
+note:" jasmine code is easy to read like a english language"
+
 */
 
 

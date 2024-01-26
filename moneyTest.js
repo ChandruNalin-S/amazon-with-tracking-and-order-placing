@@ -1,6 +1,6 @@
-import { formatCurrency } from "../scripts/utils/money.js";
+import { formatCurrency } from "./scripts/utils/money.js";
 /*
-TESTTING FRAMEWORK: Externel library that helps us write tests easier.
+TESTING FRAMEWORK: Externel library that helps us write tests easier.
 
 note: testing framework helps us do below code automatically and gives us many other features.
 
@@ -23,6 +23,8 @@ describe('',()=>{
 });-> to organize our test suite better.
 
 note: JASMINE RANDOMIZES THE ORDER OF THE TESTS
+
+note:"the below code has been written in jasmine format".
 
 */
 describe('test suite: formatCurrency',()=>{// if we want add test in the testSuite then we have to give second parameter called function.

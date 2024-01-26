@@ -1,7 +1,6 @@
 import {
   cart,
   removeFromCart, 
-  calculateCartQuantity,
   updateQuantity,
   updateDeliveryOption,
 } from '../../data/cart.js';
@@ -34,7 +33,7 @@ cart.forEach((cartItem)=>{
 
   const matchingProduct = getProduct(productId);
 
-  //console.log(matchingProduct);
+  //console.log(matchingProduct.id);
 
   const deliverOptionId = cartItem.deliveryOptionId;
 

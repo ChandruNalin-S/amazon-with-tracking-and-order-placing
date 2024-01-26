@@ -1,4 +1,9 @@
-export let cart = JSON.parse(localStorage.getItem('cart'));// getItem is used for get the item from the localstorage when we saved a value/item in the localstorage through the setItem. 
+export let cart;
+
+loadFromStroage();
+
+export function loadFromStroage(){
+  cart = JSON.parse(localStorage.getItem('cart'));// getItem is used for get the item from the localstorage when we saved a value/item in the localstorage through the setItem. 
 
 // parse is method and it's used for to convert string into orginal form/ html form. because localstorage only store/save string value.
 
@@ -15,6 +20,7 @@ if(!cart){// it is the truthy statement that if the cart is null then default va
   quantity:1,
   deliveryOptionId:'2'
 }];
+}
 }
 
 // now the cart variable can be use in any other files without naming conflicts, through by export module.
@@ -39,10 +45,12 @@ export function addtoCart(productId){
       }
     });
 
+    
     const quantitySelector = Number(document.querySelector(
       `.js-quantity-selector-${productId}`
     ).value);
-
+    
+    
 
     if(matchingItem){
       matchingItem.quantity+=1;
