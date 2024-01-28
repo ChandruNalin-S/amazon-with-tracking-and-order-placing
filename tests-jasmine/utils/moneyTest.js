@@ -1,4 +1,4 @@
-import { formatCurrency } from "../scripts/utils/money.js";
+import { formatCurrency } from "../../scripts/utils/money.js";
 /*
 TESTING FRAMEWORK: Externel library that helps us write tests easier.
 
