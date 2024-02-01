@@ -6,6 +6,17 @@ INTEGRATION TEST: TEST MANY UNITS/PIECES OF CODE WORKING TOGETHER.
 renderOrderSummary function create a part of the checkout page, note:"when we testing the renderOrdersummary" 2 things to test:->How the page looks and ->How the page behaves.
 */
 
+/*
+note:"if when we make some changes to our code, then just open the testing page and it will re-run all our tests."
+
+"HERE A PROCESS THAT WE DO WHEN WE WRITE TO TEST CODE"
+
+1->MAKE CHANGES TO CODE.
+2->RE-RUN THE TESTS.
+3->SAVE TO GIT.
+
+*/
+
 describe('test suite: renderOrderSummary',()=>{
   
   const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
@@ -24,7 +35,7 @@ describe('test suite: renderOrderSummary',()=>{
 
   //beforeEach hook is a function and it is used for setup the code that we want test, before the each test.
 
-  
+
   beforeEach(()=>{//runs code before each test.
     spyOn(localStorage,'setItem');// mock the localStroage then only it cannot modify/effect the original data in cart.
 
