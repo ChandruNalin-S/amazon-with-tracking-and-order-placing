@@ -17,6 +17,12 @@ note:"a mock only lasts for 1 test. once that test is finished, the method is no
 */
 
 
+/*
+
+UNIT TESTS: TESTING 1 PIECE OF THE CODE. like we did formatCurrency and addToCart.
+
+*/
+
 describe('test suite: addToCart', ()=>{
   it('adds an exixting product to the cart',()=>{
     spyOn(localStorage,'setItem');
