@@ -42,4 +42,12 @@ describe('test suite: formatCurrency',()=>{// if we want add test in the testSui
   it('rounds up to the nearest cent',()=>{
     expect(formatCurrency(2000.5)).toEqual('20.01');
   });
+
+  it('rounds down to nearest cent',()=>{
+    expect(formatCurrency(2000.4)).toEqual('20.00');
+  });
+
+  it('testing with negative number',()=>{
+    expect(formatCurrency(-500)).toEqual('-5.00');
+  });
 })

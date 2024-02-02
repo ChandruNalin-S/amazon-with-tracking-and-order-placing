@@ -45,22 +45,22 @@ export function addtoCart(productId){
       }
     });
 
-    
+    /*
     const quantitySelector = Number(document.querySelector(
       `.js-quantity-selector-${productId}`
     ).value);
-    
+    */
     
 
     if(matchingItem){
       matchingItem.quantity+=1;
-      matchingItem.quantity+=quantitySelector;
+      //matchingItem.quantity+=quantitySelector;
     }
     else{
       cart.push({
         productId:productId,
         quantity:1,
-        quantity:quantitySelector,
+       // quantity:quantitySelector,
         deliveryOptionId:'1'
       });
     }

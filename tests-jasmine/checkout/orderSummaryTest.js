@@ -59,16 +59,26 @@ describe('test suite: renderOrderSummary',()=>{
     loadFromStroage();
 
     renderOrderSummary();
+  });
+
+  
+  afterEach(()=>{
+    document.querySelector('.js-test-container').innerHTML ='';// this code might is used for remove the html from the page due to lot space taken by the html and this code will work, when the above code is satisfied/ the test result is correct.
   })
+  
   
   
   it('displays the cart',()=>{// testing the setup code in hook.
     expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(2);//this code gives us an array of elements. so only we used length.
 
-    expect(document.querySelector(`.js-product-quantity-${productId1}`).innerText).toContain('Quantity: 2');// toContain method is, one the method of expect for get innerText in the html. 
+    expect(document.querySelector(`.js-product-quantity-${productId1}`).innerText).toContain('Quantity: 2');// toContain method is, one the method of expect for get innerText in the html.
+    
+    expect(document.querySelector(`.js-product-name-${productId1}`).innerText).toEqual('Black and Gray Athletic Cotton Socks - 6 Pairs');
 
+    expect(document.querySelector(`.js-product-name-${productId2}`).innerText).toEqual('Intermediate Size Basketball');
 
-    document.querySelector('.js-test-container').innerHTML ='';// this code might is used for remove the html from the page due to lot space taken by the html and this code will work, when the above code is satisfied/ the test result is correct.
+    expect(document.querySelector(`.js-product-price-${productId1}`).innerText).toEqual('$10.90');
+
   }); 
   
   it('removes a product',()=>{// testing the setup code in hook
@@ -80,10 +90,10 @@ describe('test suite: renderOrderSummary',()=>{
 
     expect(document.querySelector(`.js-cart-item-container-${productId2}`)).not.toEqual(null);// not property is used for opposite the statement.
 
+    expect(document.querySelector(`.js-product-name-${productId2}`).innerText).toEqual('Intermediate Size Basketball');
+
     expect(cart.length).toEqual(1);
     expect(cart[0].productId).toEqual(productId2);
-
-    document.querySelector('.js-test-container').innerHTML ='';// this code might is used for remove the html from the page due to lot space taken by the html and this code will work, when the above code is satisfied/ the test result is correct.
   });
 });
 

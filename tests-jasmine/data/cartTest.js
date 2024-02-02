@@ -24,8 +24,12 @@ UNIT TESTS: TESTING 1 PIECE OF THE CODE. like we did formatCurrency and addToCar
 */
 
 describe('test suite: addToCart', ()=>{
+
+  beforeEach(()=>{
+    spyOn(localStorage,'setItem');//first argument is object and second argument is to method and it must given in '' or "" like in string.
+  });
+
   it('adds an exixting product to the cart',()=>{
-    spyOn(localStorage,'setItem');
     spyOn(localStorage,'getItem').and.callFake(()=>{
       return JSON.stringify([{
         productId:'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
@@ -37,13 +41,13 @@ describe('test suite: addToCart', ()=>{
 
     addtoCart('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
     expect(cart.length).toEqual(1);
+    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(cart[0].productId).toEqual('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
     expect(cart[0].quantity).toEqual(2);
    
   });
 
   it('adds a new product to the cart',()=>{
-    spyOn(localStorage,'setItem');//first argument is object and second argument is to method and it must given in '' or "" like in string.
   spyOn(localStorage,'getItem').and.callFake(()=>{
       return JSON.stringify([]);
     });// to create a mock by spyon function/ object so we can use property & method and it takes two parameter. first parameter should be object and second parameter should be method which is given in the form of string or "";
@@ -56,4 +60,15 @@ describe('test suite: addToCart', ()=>{
     expect(cart[0].quantity).toEqual(1);
   });
 });
+
+
+/*note:"expect has another method we can use: .toHavebeenCalledWith() this checks what values a mocked method received. for example:
+
+expect(localStroage.setItem).toHavebeenCalledWith('cart','[]');
+
+checks if the code called localstroage.setItem('cart','[]'); at some point
+
+
+"
+*/
 
