@@ -60,7 +60,7 @@ export function addtoCart(productId){
       cart.push({
         productId:productId,
         quantity:1,
-       // quantity:quantitySelector,
+        //quantity:quantitySelector,
         deliveryOptionId:'1'
       });
     }
