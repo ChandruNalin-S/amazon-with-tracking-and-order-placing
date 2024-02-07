@@ -123,6 +123,8 @@ export function updateDeliveryOption(productId,deliveryOptionId){
         matchingItem =cartItem;
       }
     });
+
+    if(!matchingItem) return; //if no item is found with that id then we do nothing and exit the function.
     
     matchingItem.deliveryOptionId = deliveryOptionId;
 
