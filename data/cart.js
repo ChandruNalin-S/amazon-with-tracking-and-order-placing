@@ -1,3 +1,5 @@
+import { getDeliveryOption } from "./deliveryOptions.js"
+
 export let cart;
 
 loadFromStroage();
@@ -124,8 +126,16 @@ export function updateDeliveryOption(productId,deliveryOptionId){
       }
     });
 
-    if(!matchingItem) return; //if no item is found with that id then we do nothing and exit the function.
+    if(!matchingItem){
+      return;
+    }  //if no item is found with that id then we do nothing and exit the function.
     
+    const deliveryOption = getDeliveryOption(deliveryOptionId);// getting a delivery Option. 
+
+    if(!deliveryOption){
+      return;
+    } // if the delivery option is not available in our array of options we also do nothing and exit the function.
+
     matchingItem.deliveryOptionId = deliveryOptionId;
 
     saveToStorage();
