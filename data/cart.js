@@ -140,3 +140,13 @@ export function updateDeliveryOption(productId,deliveryOptionId){
 
     saveToStorage();
 }
+
+
+/* "The above code is called a procedural programming 
+
+  Procedure =  a set of step-by-step instructions and this is basically a function.
+
+
+  "Object-Oriented Programming (OOP) = Organize our code into objects."
+
+"*/
