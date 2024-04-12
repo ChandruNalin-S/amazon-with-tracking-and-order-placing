@@ -1,3 +1,6 @@
+import { formatCurrency } from "../scripts/utils/money.js";
+
+
 export function getProduct(productId){
   let matchingProduct;
 
@@ -8,6 +11,42 @@ export function getProduct(productId){
   });
   return matchingProduct;
 }
+
+
+class Product{
+  id;
+  image;
+  name;
+  rating;
+  priceCents;
+
+  constructor(productDetails){
+    this.id = productDetails.id;
+    this.image = productDetails.image;
+    this.name = productDetails.name;
+    this.rating = productDetails.rating;
+    this.priceCents = productDetails.priceCents;
+  }
+
+  getStarUrl(){
+     return `images/ratings/rating-${this.rating.stars*10}.png`;
+  }
+
+  getPrice(){
+     return `$${formatCurrency(this.priceCents)}`;
+  }
+}
+
+
+// Map is a function and it is used to loop through the array elements and return an new array.
+
+
+// In below we have done some changes, that is we are converting products array object(regular array object) into class. that's why we used map function.
+
+// the map function will work like each product in the regular array object (products array object). it create a function and inside the function have parameter, the parameter store the array object inside the products array object. 
+
+// And converting the object into class by passing the productDetails into the Product class; 
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -667,4 +706,9 @@ export const products = [
       "mens"
     ]
   }
-];
+].map((productDetails)=>{
+  return new Product(productDetails);
+});
+
+//console.log(products);
+
