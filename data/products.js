@@ -35,7 +35,78 @@ class Product{
   getPrice(){
      return `$${formatCurrency(this.priceCents)}`;
   }
+  
+  extraInfoHTML(){
+    return '';
+  }
+  
 }
+
+
+
+/*
+  IMPORTANT -> Inheritance = let us reuse code between classes.
+
+  Object oriented programming has a feature called inheritance that allows one class to get all the properties and methods from another class.
+
+  Product class is also called a "parent class" and the Clothing class is called a "Child class".
+
+  NOte: In clothing class constructor we have to give all property and method that are inside in the parent class like Product class.
+
+
+  Note: if the child class doesn't have any property or constructor then by default it use the parent class constructor;
+
+  Note: "Polymorphism-> use a method without knowing the class. For example-> product.extraInfoHTML() in amazon.js" and it is a alternative if-else statments.
+
+  product.extraInfoHTML() then class itself determine what this method does.
+*/
+
+class Clothing extends Product{
+  sizeChartLink;
+
+  constructor(productDetails){
+    super(productDetails); // super keyword is use to calls the parent's class constructor to initialize and it have all properties and method that inside in the parent class constructor.
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+
+  extraInfoHTML(){// this method is called a override methoding because in Parent class we have define extraInfoHTML method but we implement here again that's why this called Override.
+    //super.extraInfoHTML(); Through the super keyword we can access/call constructor and method in parent class.
+    return `
+      <a href = "${this.sizeChartLink}" target="_blank">Size Chart</a>
+    `;
+  }
+
+}
+
+/* 
+// Note: One class is a more specific type of another class.
+
+const tshirt = new Clothing(
+  {
+    id: "83d4ca15-0f35-48f5-b7a3-1ea210004f2e",
+    image: "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
+    name: "Adults Plain Cotton T-Shirt - 2 Pack",
+    rating: {
+      stars: 4.5,
+      count: 56
+    },
+    priceCents: 799,
+    keywords: [
+      "tshirts",
+      "apparel",
+      "mens"
+    ],
+    type: "clothing",
+    sizeChartLink: "images/clothing-size-chart.png"
+  }
+);
+
+console.log(tshirt);
+
+console.log(tshirt.getPrice());
+
+
+*/
 
 
 // Map is a function and it is used to loop through the array elements and return an new array.
@@ -46,6 +117,10 @@ class Product{
 // the map function will work like each product in the regular array object (products array object). it create a function and inside the function have parameter, the parameter store the array object inside the products array object. 
 
 // And converting the object into class by passing the productDetails into the Product class; 
+
+/*
+ Note: we convert all the products array object into product class.
+*/
 
 export const products = [
   {
@@ -91,7 +166,7 @@ export const products = [
       "apparel",
       "mens"
     ],
-    type: "clothing",
+    type: "clothing",//Discriminator Property-> Type property is used to determine what object it is to create/convert a class.
     sizeChartLink: "images/clothing-size-chart.png"
   },
   {
@@ -707,8 +782,11 @@ export const products = [
     ]
   }
 ].map((productDetails)=>{
+  if(productDetails.type === "clothing") return new Clothing(productDetails);
   return new Product(productDetails);
 });
+
+
 
 
 
