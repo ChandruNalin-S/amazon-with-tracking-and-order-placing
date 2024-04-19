@@ -788,7 +788,45 @@ export const products = [
 
 
 
+/*
+const date = new Date();
+console.log(date);
 
+console.log(date.toLocaleTimeString());// this tolocaleTimeString method is used to give current time and every Date object have property and method.
+*/
 
 //console.log(products);
+
+
+
+
+
+/*
+
+console.log(this);
+const object1 = {
+  a:2,
+
+  display: ()=>{
+    console.log(object1.a)
+  }
+}
+
+console.log(object1.a);
+
+*/
+
+/* 
+Note: Arrow function do not change the value of "this".
+*/
+
+/*
+function logThis(){
+  console.log(this);
+}
+
+logThis();
+logThis.call('hello')// function have method called call, which can used to be give value to the "this" keyword inside the function and when we passing value to the this keyword through the call method, the first parameter must be "this value" and remaining parameter can be anything. 
+*/
+
 
