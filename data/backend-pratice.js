@@ -49,13 +49,16 @@ Types of requests:
 ->UPDATE
 */
 // below code is to set it up this http request.
-xhr.open('GET', 'https://supersimplebackend.dev/documentation');//IN open we have to give two parameter-> one is "Type of HTTP message" and second parameter is to "where to send this HTTP message or request".  
+xhr.open('GET', 'https://supersimplebackend.dev');//IN open we have to give two parameter-> one is "Type of HTTP message" and second parameter is to "where to send this HTTP message or request".  
 
 // after the domain name "/" if we give a name it called a url paths for example:https://supersimplebackend.dev/documentation, the documentation is a url paths after the domain name/,  through the url paths we can request or send different request to backend and we get response or different response.
 
-// response from the backend must be -> text, html, json, image.
+// response from the backend must be -> text, html, json, image and different type of response.
 
 xhr.send();// sending the message to another computer or backend computer on the internet. and xhr.send is a asynchronous code->it means does not wait for this line of code to finish it will move to next line of code.
 
 
 // xhr.response-> undefined because it request and response take time to come across from the internet to the our computer. that's why we used addeventlistener at the top to load the response through "load" type. 
+
+
+// NOTE: Using the browser = making a GET request to backend.
