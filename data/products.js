@@ -141,6 +141,31 @@ console.log(tshirt.getPrice());
  Note: we convert all the products array object into product class.
 */
 
+export let products = [];
+
+export function loadProducts(fun){// renderProductsGrid function loaded in the fun function it is called a callback, callback is known as calling/ runing a function in the future work for-example: setTimeout();
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load',()=>{
+    products = JSON.parse(xhr.response).map((productDetails)=>{
+      if(productDetails.type === "cooking") return new Appliance(productDetails);
+      if(productDetails.type === "clothing") return new Clothing(productDetails);
+      return new Product(productDetails);
+    });
+
+    // after the loading the response we have to display the products in the bottom/below the addeventlistener. so that's why we used fun() and the fun which contains the function of renderProductsGrid() and products code to display the value in the amazon home page.
+
+    console.log('load products');
+
+    fun();
+  })
+  xhr.open("GET",'https://supersimplebackend.dev/products');
+  xhr.send();
+}
+
+//loadProducts();
+
+/*
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -817,7 +842,7 @@ export const products = [
   if(productDetails.type === "clothing") return new Clothing(productDetails);
   return new Product(productDetails);
 });
-
+*/
 
 
 /*
