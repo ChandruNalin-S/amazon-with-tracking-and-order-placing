@@ -141,7 +141,7 @@ console.log(tshirt.getPrice());
  Note: we convert all the products array object into product class.
 */
 
-export let products = [];
+export let products = [];// initally undefined 
 
 export function loadProducts(fun){// renderProductsGrid function loaded in the fun function it is called a callback, callback is known as calling/ runing a function in the future work for-example: setTimeout();
   const xhr = new XMLHttpRequest();
@@ -157,7 +157,7 @@ export function loadProducts(fun){// renderProductsGrid function loaded in the f
 
     console.log('load products');
 
-    fun();
+    fun();//callback
   })
   xhr.open("GET",'https://supersimplebackend.dev/products');
   xhr.send();
