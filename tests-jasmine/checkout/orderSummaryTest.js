@@ -37,7 +37,7 @@ describe('test suite: renderOrderSummary',()=>{
 
 
   beforeAll((done)=>{// this code is to, we have to load the loadproducts once not twice that's why we used beforeAll.
-    loadProducts(()=>{// loadproducts is a asynchronous code, so it will send the request to backent but didn't wait for the response.
+    loadProducts(()=>{// loadproducts is a asynchronous code, so it will send the request to backend but didn't wait for the response.
       done();// done(), lets us control when to go to the next step.
     });
   });
