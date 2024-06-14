@@ -1,7 +1,7 @@
 import { renderOrderSummary } from "../../scripts/checkout/orderSummary.js";
 import { loadFromStroage ,cart} from "../../data/cart.js";
 
-import {loadProducts} from "../../data/products.js";
+import {loadProducts,loadProductsFetch} from "../../data/products.js";
 /*
 INTEGRATION TEST: TEST MANY UNITS/PIECES OF CODE WORKING TOGETHER. 
 
@@ -35,16 +35,23 @@ describe('test suite: renderOrderSummary',()=>{
 
   // note: Jasmine has a feature for waiting for some code to finish called "Done function"
 
-
+/*
   beforeAll((done)=>{// this code is to, we have to load the loadproducts once not twice that's why we used beforeAll.
     loadProducts(()=>{// loadproducts is a asynchronous code, so it will send the request to backend but didn't wait for the response.
       done();// done(), lets us control when to go to the next step.
     });
   });
+*/
 
   // note:"hooks->" this is used for sharing the setup code to test case and removing duplicate of setup code in each test case.
 
   //beforeEach hook is a function and it is used for setup the code that we want test, before the each test.
+
+  beforeAll((done)=>{
+    loadProductsFetch().then(()=>{
+      done();
+    })
+  })
 
   
 
