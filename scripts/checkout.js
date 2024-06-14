@@ -11,6 +11,15 @@ import {loadProducts,loadProductsFetch} from '../data/products.js';
 
 import { loadCart } from '../data/cart.js';
 
+
+
+function loadPage(){
+  
+}
+
+
+
+
 /*
 PROMISE
 ->better way to handle asynchronous code.

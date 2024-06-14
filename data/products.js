@@ -143,10 +143,18 @@ console.log(tshirt.getPrice());
 
 export let products = [];// initally undefined 
 
+/*
 
+FETCH: fetch is a better way to make HTTP requests. 
+
+Important: In fetch, by default it use "GET" requests.
+
+note: fetch uses a promise. 
+
+*/
 export function loadProductsFetch(){
   const promise = fetch('https://supersimplebackend.dev/products').then((response)=>{
-    return response.json();
+    return response.json();//instead of using this code "JSON.parse(xhr.response)", this "response.json()"code used to  convert json code into javascript code for example: it returns javascript array objects. 
   }).then((productsData)=>{
     products = productsData.map((productDetails)=>{
 
@@ -160,7 +168,7 @@ export function loadProductsFetch(){
     console.log('load products');
   });
 
-  return promise;
+  return promise;// returning the promise for move to next step to executed.
 }
 
 /*
