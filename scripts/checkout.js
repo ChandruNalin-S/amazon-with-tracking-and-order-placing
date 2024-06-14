@@ -11,12 +11,56 @@ import {loadProducts,loadProductsFetch} from '../data/products.js';
 
 import { loadCart } from '../data/cart.js';
 
+/*
+
+Async Await-> even better way to handle asynchronous code.
+
+note: Use async await, over promise and callbacks because it much cleaner. 
+
+note: it is a alternative of promises and callbacks to overcome lines of code.
+
+note: Async await is a shortcut for promises.
+
+feature: async lets us use "await".
+
+await-> lets us wait for a promise to finish before going to the next line.
+
+important:"async await can only be used with promise".
 
 
-function loadPage(){
+"important": await cannot be used in normal function, so we have to convert normal function into async function then only we can use await inside the function.
+
+*/
+
+async function loadPage(){// makes a function return a promise.
+
+  await loadProductsFetch();// lets us write asynchronous code like normal code. 
+
+  // note: we can only use await,inside an async function also closest function has to be async and "async await can only be used with promise".
+
+  const value = await new Promise((resolve)=>{
+    loadCart(()=>{
+      resolve('value2');
+    });
+  });
+
+  /*
   
+  instead of using then function, we just written a function below line for to render or display the data into the page.
+
+  And it's looks like normal code to understand the 
+  step by step process.
+
+
+  */
+
+  renderCheckoutHeader();
+  renderOrderSummary();
+  renderPaymentSummary();
+
 }
 
+loadPage();
 
 
 
@@ -47,6 +91,7 @@ note:Promise.all looks like array of promise to run multiple promise simultaneou
 purpose: instead of waiting for each promise one by one to complete. it will run all the promise at the same time.
 */
 
+/*
 Promise.all([
   loadProductsFetch(),
   new Promise((resolve)=>{
@@ -68,10 +113,13 @@ Promise.all([
   renderPaymentSummary();
 })
 
+*/
 
 /*
 new Promise((resolve)=>{// resolve is a function and it is similar to done() function in jasmine.purpose-> lets us control when to go to the next step.
+
   loadProducts(()=>{// it is a asynchronous code/function. 
+  
     resolve();// when the asynchronous code like loadproducts is load or get responses then the resolve function will control and move to the next step of code in inside the "then function". 
   });
 
