@@ -30,19 +30,53 @@ important:"async await can only be used with promise".
 
 "important": await cannot be used in normal function, so we have to convert normal function into async function then only we can use await inside the function.
 
+note: Error handling in Async await by using try/catch.
+
+note: we can use try/catch to catch errors in normal code and whenever we get an error, it will skip the rest of the code. 
+
+Important: Why don't we use try/catch everywhere?-> it's meant to handle unexpected errors(code is correct, outside our control).
+
+
+note: We can manually create errors by using "throw"
+
+note: In throw we can give any type of value like string and number.
+
 */
 
 async function loadPage(){// makes a function return a promise.
 
-  await loadProductsFetch();// lets us write asynchronous code like normal code. 
+  try{
+   //throw 'error1';// manual created error.
+
+
+
+    await loadProductsFetch();// lets us write asynchronous code like normal code. 
 
   // note: we can only use await,inside an async function also closest function has to be async and "async await can only be used with promise".
 
-  const value = await new Promise((resolve)=>{
+
+  /*
+   note: if we are using promises, there are 2 ways to manually create an error.
+
+   note: if we await a promise instead of going into catch, it's going to go inside catch. 
+  
+  */
+  const value = await new Promise((resolve,reject)=>{// if we need to create an error in the future then we can use this "reject" function.
+
+    //throw 'error2';// it throws an error and it goes to inside the catch, if the throw inside the await promise and the code becomes a synchronous or normal code.
+
+    // throw does not work in the future that's why throw does not use in inside the loadcart function because if the loadCart function get the response then the inside code is going to generate/work that's why is called a future work.
+
     loadCart(()=>{
+      //reject('error3')//reject is a function and lets us create an error in the future for asynchronous.
       resolve('value2');
     });
   });
+
+  } catch (error){
+    console.log('unexpected error. please try again later');
+  }
+  
 
   /*
   

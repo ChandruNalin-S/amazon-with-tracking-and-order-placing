@@ -151,6 +151,9 @@ Important: In fetch, by default it use "GET" requests.
 
 note: fetch uses a promise. 
 
+
+note: In promise give us two methods, one is "then" function and another one is "catch", "catch" is used for error handling.
+
 */
 export function loadProductsFetch(){
   const promise = fetch('https://supersimplebackend.dev/products').then((response)=>{
@@ -166,10 +169,13 @@ export function loadProductsFetch(){
     });
 
     console.log('load products');
+  }).catch((error)=>{// the function parameter have the info of error.
+    console.log('unexpected error. please try again later');
   });
 
   return promise;// returning the promise for move to next step to executed.
 }
+
 
 /*
 loadProductsFetch().then(()=>{
@@ -193,7 +199,21 @@ export function loadProducts(fun){// renderProductsGrid function loaded in the f
     console.log('load products');
 
     fun();//callback
-  })
+  });
+
+  /*
+  Error handling:
+    ->When we're sending HTTP requests, we could get unexpected errors like internet issue. so how to handle this by using error handling.
+  
+
+  note:we have to setup a separate callback just for errors.
+  
+  */
+
+
+  xhr.addEventListener('error',(error)=>{// it is callback for error handling and inside the function parameter have a error information.
+    console.log('unexpected error. please try again later');
+  });
   xhr.open("GET",'https://supersimplebackend.dev/products');
   xhr.send();
 }
