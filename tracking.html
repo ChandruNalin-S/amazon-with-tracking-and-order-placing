@@ -88,5 +88,31 @@
         </div>
       </div>
     </div>
+
+
+    <script>
+
+      /*
+      note: URL parameter = let us save data directly in the URL and it is property-value pair like in object.
+
+      syntax: ?property= value & property = value
+      ?-> it denotes adding a URL parameters to the URL and & -> to save another parameter into the URL.
+
+      note: using javascript to get the URL parameter data by using built-in class called URL(); 
+
+      note: URL parameter lets us save different data in each URL.
+      
+      */
+
+
+      //get the parameter out of the url by using built-in class called "URl"
+      const url = new URL(window.location.href)// after getting the url and store in the variable,to break the url and get the URL parameter.
+
+
+      //URL parameters is also called a search parameters
+      console.log(url.searchParams.get('orderId'));// get is a method use to get the URL parameter by individually.
+      console.log(url.searchParams.get('productId'));// get is a method use to get the URL
+
+    </script>
   </body>
 </html>
