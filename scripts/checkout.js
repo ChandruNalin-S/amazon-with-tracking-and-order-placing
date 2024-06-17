@@ -9,7 +9,7 @@ import {loadProducts,loadProductsFetch} from '../data/products.js';
 
 //import '../data/backend-pratice.js';
 
-import { loadCart } from '../data/cart.js';
+import { loadCart, loadCartFetch } from '../data/cart.js';
 
 /*
 
@@ -61,17 +61,23 @@ async function loadPage(){// makes a function return a promise.
    note: if we await a promise instead of going into catch, it's going to go inside catch. 
   
   */
+
+  /* 
   const value = await new Promise((resolve,reject)=>{// if we need to create an error in the future then we can use this "reject" function.
 
     //throw 'error2';// it throws an error and it goes to inside the catch, if the throw inside the await promise and the code becomes a synchronous or normal code.
 
     // throw does not work in the future that's why throw does not use in inside the loadcart function because if the loadCart function get the response then the inside code is going to generate/work that's why is called a future work.
 
+    
     loadCart(()=>{
       //reject('error3')//reject is a function and lets us create an error in the future for asynchronous.
       resolve('value2');
     });
   });
+  */
+
+  await loadCartFetch();
 
   } catch (error){
     console.log('unexpected error. please try again later');

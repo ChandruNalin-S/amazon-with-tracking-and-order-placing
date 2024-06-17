@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practice Backend, promise and Async Await</title>
+</head>
+<body>
+  <script>
+    // using callbacks
+    const xhr = new XMLHttpRequest();
+
+    xhr.addEventListener('load',()=>{
+      console.log(xhr.response);
+    })
+    xhr.open('GET','https://supersimplebackend.dev/greeting');
+
+    xhr.send();
+
+    // using Async await
+    async function ResponseFunction(){ 
+    const response = await fetch('https://supersimplebackend.dev/greeting');
+
+    const GetResponse = await response.text();
+    console.log(GetResponse);
+    }
+
+    ResponseFunction();
+
+    // using fetch 
+    fetch('https://supersimplebackend.dev/greeting').then((response)=>{
+      return response.text();
+    }).then((GetResponse)=>{
+      console.log(GetResponse);
+    });
+
+    /*Notice that even though GET /greeting and POST /greeting use the same URL path /greeting, they do different things.*/
+
+
+    // using POST requests
+
+    async function PostResponse(){
+      const response = await fetch('https://supersimplebackend.dev/greeting',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          name:'CHANDRU'
+        })
+      });
+
+      const GetResponse = await response.text();
+      console.log(GetResponse);
+    }
+
+    PostResponse();
+    
+    //we get an error known as a CORS (Cross-Orgin Resource Sharing)error. this means the URL your code is running on(probably http://127.0.0.1:5500) is different than https://amazon.com, so Amazon backend blocked your request for security reasons. your code is correct, Amazon needs to change some settings in their backend to allow your requests.
+
+    fetch('https://amazon.com').then((response)=>{
+      return response.json();
+    }).then((GetResponse)=>{
+      console.log(GetResponse);
+    })
+
+    
+    // Adding Error handling for above code.
+
+    async function ErrorHandlingOfAmazonResponse(){
+      try{
+        const response = await fetch('https://amazon.com');
+
+        const GetResponse = await response.json();
+         console.log(GetResponse);
+
+         return response;
+
+      }catch(response){
+        console.log("Your request was blocked by the backend and your promise is fail to fetch");
+      }
+    }
+
+    ErrorHandlingOfAmazonResponse();
+
+    //Invalid request due to without body/ data sending to the backend by using "POST" request.
+
+    async function InvalidRequest(){
+
+      try{
+            const response = await fetch('https://supersimplebackend.dev/greeting',{
+            method:'POST',
+            headers:{
+              'Content-Type':'application/json'
+            }
+          })
+
+          if(response.status >= 400){
+            throw response;
+          }
+
+          const text = await response.text();
+          console.log(text);
+
+        } catch(error){
+          if(error.status === 400){
+            const errorValue = await error.json();
+            console.log(errorValue);
+          }
+          else{
+            console.log('Network issue, please try again later');
+          }
+        }
+    }
+
+    InvalidRequest();
+
+    
+   
+
+
+  </script>
+</body>
+</html>

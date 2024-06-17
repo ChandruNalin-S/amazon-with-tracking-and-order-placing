@@ -151,7 +151,17 @@ export function updateDeliveryOption(productId,deliveryOptionId){
 
 "*/
 
+// below line of codes is sample code for practicing of creating  async await version of loadcart using fetch.
 
+export async function loadCartFetch(){
+  const response = await fetch('https://supersimplebackend.dev/cart');
+
+  const GetResponse = await response.text();
+  console.log(GetResponse);
+  return GetResponse;
+}
+
+// below lines of code of loadcart is a sample code for practicing backend and it will console the "load cart" text message from backend using callback.
 export function loadCart(fun){
   const xhr = new XMLHttpRequest();
 
