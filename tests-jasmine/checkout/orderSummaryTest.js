@@ -47,11 +47,9 @@ describe('test suite: renderOrderSummary',()=>{
 
   //beforeEach hook is a function and it is used for setup the code that we want test, before the each test.
 
-  beforeAll((done)=>{
-    loadProductsFetch().then(()=>{
-      done();
-    })
-  })
+  beforeAll(async()=>{
+    await loadProductsFetch();
+  });
 
   
 

@@ -1,4 +1,4 @@
-import { calculateCartQuantity, cart } from "../../data/cart.js"; 
+import { calculateCartQuantity, cart, updateQuantity } from "../../data/cart.js"; 
 import { getProduct } from "../../data/products.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import { formatCurrency } from "../utils/money.js";
@@ -135,7 +135,7 @@ note:{
     //console.log(order);
 
     window.location.href = 'orders.html';// it is a object and used to navigate from one html file to another html file.
-
+    
   });
 
 }
