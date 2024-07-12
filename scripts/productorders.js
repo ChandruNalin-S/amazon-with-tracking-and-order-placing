@@ -2,13 +2,13 @@ import { orders } from "../data/orders.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { formatCurrency } from "./utils/money.js";
 import { getProduct, loadProductsFetch } from "../data/products.js";
-import { calculateCartQuantity } from "../data/cart.js";
+import { addtoCart, calculateCartQuantity } from "../data/cart.js";
+
 
 function calculateCartQuantityInOrderPage(){
   const cartQuantity = calculateCartQuantity()
   document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 }
-
 
 async function loadPage(){
   await loadProductsFetch();
@@ -42,7 +42,6 @@ async function loadPage(){
 
   function productsListHTML(order){
     let productsListHTML = '';
-
      order.products.forEach((productDetails)=>{
       const product = getProduct(productDetails.productId);
       productsListHTML +=`
@@ -61,7 +60,7 @@ async function loadPage(){
           <div class="product-quantity">
             Quantity: ${productDetails.quantity}
           </div>
-          <button class="buy-again-button button-primary">
+          <button class="buy-again-button button-primary js-buy-again-button" data-product-id ="${product.id}">
             <img class="buy-again-icon" src="images/icons/buy-again.png">
             <span class="buy-again-message">Buy it again</span>
           </button>
@@ -80,6 +79,19 @@ async function loadPage(){
   }
 
   document.querySelector('.js-orders-grid').innerHTML = Ordershtml;
+
+  document.querySelectorAll('.js-buy-again-button').forEach((button)=>{
+    button.addEventListener('click',()=>{
+      addtoCart(button.dataset.productId);
+      button.innerHTML = 'Added';
+      setTimeout(()=>{
+        button.innerHTML = `
+          <img class="buy-again-icon" src="images/icons/buy-again.png">
+          <span class="buy-again-message">Buy it again</span>
+        `;
+      },1000);
+    });
+  });
 }
 
 
